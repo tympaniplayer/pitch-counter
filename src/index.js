@@ -1,26 +1,15 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from 'react-dom';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import pitchCounter from './reducers/reducers.js';
+import App from './components/App';
 
-class App extends React.Component {
-    constructor( props ){
-        super( props );
-        this.handleChange = this.handleChange.bind( this );
-        this.state = { name: 'Nate' };
-    }
+let store = createStore( pitchCounter );
 
-    handleChange( e ){
-        this.setState( { name: e.target.value } );
-    }
-
-    render(){
-        return (
-            <div style={{textAlign: 'center'}}>
-                <h1>Welcome</h1>
-                <p>Hello {this.state.name}</p>
-                <input onChange={this.handleChange} defaultValue={this.state.name} />
-            </div>
-        );
-    }
-}
-
-ReactDOM.render(<App />,  document.getElementById( 'app' ) );
+render( 
+    <Provider store={store}>
+        <App />
+    </Provider>,
+    document.getElementById('app')
+);
