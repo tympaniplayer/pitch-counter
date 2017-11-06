@@ -1,4 +1,4 @@
-import { EDIT_NAME } from '../actions/actions';
+import { EDIT_NAME, ADD_PITCHER } from '../actions/actions';
 
 
 /*
@@ -28,19 +28,35 @@ pitchers: [
 */
 
 
-const initialState = {
-    name: 'Nate'
-}
-
-function pitchCounter ( state = initialState, action ) {
+function pitchCounter ( state = [], action ) {
+    debugger;
     switch( action.type ) {
-        case EDIT_NAME: 
-            return Object.assign({}, state, {
-                name: action.text
-            } );
+        case ADD_PITCHER: 
+            let newPitcher = getNewPitcher(action.name);
+            let index = state.length;
+            return insertItem (state, newPitcher, index);
+            
         default:
             return state;
-    }
+    }    
+}
+
+function insertItem (array, item, index){
+    let newArray = array.slice();
+    newArray.splice(index, 0, item)
+}
+
+function getNewPitcher(name) {
+    return {
+        name: name,
+        batters: [],
+        totalPitches: 0,
+        totalStrikes: 0,
+        totalBalls: 0,
+        totalStrikeouts: 0,
+        totalWalks: 0,
+        totalHits: 0
+    };
 }
 
 export default pitchCounter;
