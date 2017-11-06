@@ -5,7 +5,7 @@ describe ('pitch counter reducer', () => {
     it('should return the initial state', () =>{
         expect(pitchCounter(undefined, {})).toEqual([]);
     })
-
+    debugger;
     it('should handle ADD_PITCHER', () =>{
         expect(
             pitchCounter([], {

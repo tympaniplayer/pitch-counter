@@ -43,7 +43,8 @@ function pitchCounter ( state = [], action ) {
 
 function insertItem (array, item, index){
     let newArray = array.slice();
-    newArray.splice(index, 0, item)
+    newArray.splice(index, 0, item);
+    return newArray;
 }
 
 function getNewPitcher(name) {
