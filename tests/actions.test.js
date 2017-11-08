@@ -6,7 +6,10 @@ describe ('action', () => {
         const name = 'Sandy Koufax';
         const expectedAction = {
             type: actions.ADD_PITCHER,
-            name
+            payload: {                
+                name: "Sandy Koufax", 
+                pitcherId: "pitcher0"                
+            }
         }
         debugger;
         expect(actions.addPitcher(name)).toEqual(expectedAction);

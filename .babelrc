@@ -1,5 +1,7 @@
 {
     "presets": ["es2015", "react"],
-    "sourceMaps": "true",
-    "retainLines": true
+    "sourceMaps":"both",
+    "plugins": [
+        "transform-object-rest-spread"
+    ]
 }

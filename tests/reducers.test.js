@@ -3,26 +3,36 @@ import * as actions from '../src/actions/actions';
 
 describe ('pitch counter reducer', () => {
     it('should return the initial state', () =>{
-        expect(pitchCounter(undefined, {})).toEqual([]);
+        expect(pitchCounter(undefined, {})).toEqual({ pitchers: { }, batters: { } });
     })
     debugger;
     it('should handle ADD_PITCHER', () =>{
         expect(
-            pitchCounter([], {
+            pitchCounter(undefined, {
                 type: actions.ADD_PITCHER,
-                name: 'Sandy Koufax'
+                payload: {
+                    pitcherId: "pitcher0",
+                    name: "Sandy Koufax"
+                }
             })
-        ).toEqual([
+        ).toEqual(
             {
-                name: 'Sandy Koufax',
-                batters: [],
-                totalPitches: 0,
-                totalStrikes: 0,
-                totalBalls: 0,
-                totalStrikeouts: 0,
-                totalWalks: 0,
-                totalHits: 0
+                pitchers: {
+                    pitcher0: {
+                        name: "Sandy Koufax",
+                        totalPitches: 0,
+                        totalStrikes: 0,
+                        totalBalls: 0,
+                        totalStrikeouts: 0,
+                        totalWalks: 0,
+                        totalHits: 0,        
+                        batters: []
+                    }
+                },
+                batters: {
+
+                }
             }
-        ]);
+        );
     });
 });
