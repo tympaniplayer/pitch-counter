@@ -1,12 +1,13 @@
 import pitchCounter from '../src/reducers/reducers';
 import * as actions from '../src/actions/actions';
+import { onePitcherState, oneBatterState, initialState } from './testStates';
 
-describe ('pitch counter reducer', () => {
-    it('should return the initial state', () =>{
-        expect(pitchCounter(undefined, {})).toEqual({ pitchers: { }, batters: { } });
+describe('pitch counter reducer', () => {
+    it('should return the initial state', () => {
+        expect(pitchCounter(undefined, {})).toEqual( initialState );
     })
     debugger;
-    it('should handle ADD_PITCHER', () =>{
+    it('should handle ADD_PITCHER', () => {
         expect(
             pitchCounter(undefined, {
                 type: actions.ADD_PITCHER,
@@ -15,24 +16,18 @@ describe ('pitch counter reducer', () => {
                     name: "Sandy Koufax"
                 }
             })
-        ).toEqual(
-            {
-                pitchers: {
-                    pitcher0: {
-                        name: "Sandy Koufax",
-                        totalPitches: 0,
-                        totalStrikes: 0,
-                        totalBalls: 0,
-                        totalStrikeouts: 0,
-                        totalWalks: 0,
-                        totalHits: 0,        
-                        batters: []
-                    }
-                },
-                batters: {
+        ).toEqual(onePitcherState);
+    });
 
+    it('should handle ADD_BATTER', () => {
+        expect(
+            pitchCounter(onePitcherState, {
+                type: actions.ADD_BATTER,
+                payload: {
+                    name: "Carlos Correa",
+                    batterId: "batter0",
+                    pitcherId: "pitcher0",
                 }
-            }
-        );
+            })).toEqual( oneBatterState )
     });
 });

@@ -1,4 +1,4 @@
-import { EDIT_NAME, ADD_PITCHER, ADD_BATTER } from '../actions/actions';
+import { EDIT_NAME, ADD_PITCHER, ADD_BATTER, REMOVE_BATTER } from '../actions/actions';
 
 
 const initialState = { pitchers: {}, batters: {} };
@@ -27,34 +27,30 @@ function pitchCounter ( state = initialState, action ) {
                 ...state,
                 pitchers: {
                     ...state.pitchers,
-                    [pitcherId]: {
+                    [payload.pitcherId]: {
                         ...pitcher,
                         batters: pitcher.batters.concat(payload.batterId)
                     }
                 },
                 batters: {
                     ...state.batters,
-                    [batterId]: newBatter
+                    [payload.batterId]: newBatter
                 }
             }
         break;
+        case REMOVE_BATTER:
+            let batterToRemove = state.batters[payload.batterId];
+            let pitcherWithBatterToRemove = state.pitchers[payload.pitcherId];
+
+            
+            return {
+
+            }
+            break;
         default:
             return state;
     }    
 }
-
-function batterReducer(state = {}, action){
-    switch(action.type){
-        
-    }
-}
-
-function insertItem (array, item, index){
-    let newArray = array.slice();
-    newArray.splice(index, 0, item);
-    return newArray;
-}
-
 
 function getNewPitcher(name) {
     return {
@@ -67,6 +63,14 @@ function getNewPitcher(name) {
         totalHits: 0,        
         batters: [],
     };
+}
+
+function getNewBatter (name) {
+    return {
+        name: name,
+        strikes: 0,
+        balls: 0
+    }
 }
 
 export default pitchCounter;
